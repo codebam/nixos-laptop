@@ -252,10 +252,6 @@
               block = "cpu";
             }
             {
-              block = "amd_gpu";
-              format = " $icon $utilization $vram_used_percents";
-            }
-            {
               block = "load";
             }
             {
@@ -270,6 +266,9 @@
             {
               block = "time";
               interval = 60;
+            }
+            {
+              block = "battery";
             }
           ];
         };
@@ -436,7 +435,7 @@
       userEmail = "codebam@riseup.net";
       userName = "Sean Behan";
       signing = {
-        key = "0F6D5021A87F92BA";
+        key = "097B3E3F284C7B4C";
         signByDefault = true;
       };
     };
