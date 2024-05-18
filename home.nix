@@ -348,14 +348,6 @@
       };
       extraLuaConfig = ''
 
-        require('gen').setup({
-          model = "llama3:8b-instruct-fp16",
-          display_mode = "split",
-          show_prompt = true,
-          show_model = true,
-          no_auto_close = true,
-        })
-
         require('nvim-treesitter.configs').setup {
           auto_install = false,
           ignore_install = {},
