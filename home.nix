@@ -221,8 +221,8 @@
       };
       extraConfig = let inherit modifier; in ''
         bindsym --whole-window {
-          ${modifier}+Shift+button4 exec "${pkgs.light}/bin/light -A 1"
-          ${modifier}+Shift+button5 exec "${pkgs.light}/bin/light -U 1"
+          ${modifier}+Shift+button4 exec "${pkgs.brightnessctl}/bin/brightnessctl set +1%"
+          ${modifier}+Shift+button5 exec "${pkgs.brightnessctl}/bin/brightnessctl set 1%-"
           ${modifier}+button4 exec "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 1%+"
           ${modifier}+button5 exec "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 1%-"
         }
