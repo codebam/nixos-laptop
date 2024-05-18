@@ -120,6 +120,9 @@
             adaptive_sync = "on";
             subpixel = "none";
           };
+          "eDP-1" = {
+            scale = "1";
+          };
         };
         input = {
           "1739:0:Synaptics_TM3289-021" = {
@@ -320,8 +323,6 @@
       profileExtra = ''
         PATH="$HOME/.local/bin:$PATH"
         export PATH
-        WLR_RENDERER=vulkan
-        export WLR_RENDERER
       '';
     };
     neovim = {
