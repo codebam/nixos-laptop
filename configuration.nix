@@ -250,6 +250,7 @@
     })
   ];
   services.tlp.enable = true;
+  powerManagement.powertop.enable = true;
   system = {
     autoUpgrade = {
       enable = true;
