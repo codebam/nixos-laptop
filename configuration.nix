@@ -119,7 +119,7 @@
     isNormalUser = true;
     home = "/home/codebam";
     description = "Sean Behan";
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" "video" ];
     packages = with pkgs; [
       flatpak
     ];
@@ -249,6 +249,7 @@
       bcachefs-tools = inputs.bcachefs-fix.packages.x86_64-linux.bcachefs;
     })
   ];
+  services.tlp.enable = true;
   system = {
     autoUpgrade = {
       enable = true;
