@@ -121,7 +121,7 @@
             subpixel = "none";
           };
           "eDP-1" = {
-            scale = "1";
+            scale = "1.5";
           };
         };
         input = {
@@ -402,7 +402,6 @@
         pkgs.vimPlugins.todo-comments-nvim
         pkgs.vimPlugins.vim-snippets
         pkgs.vimPlugins.fzf-vim
-        inputs.gen-nvim-latest-pin.legacyPackages.${pkgs.system}.vimPlugins.gen-nvim
         pkgs.vimPlugins.nvim-treesitter.withAllGrammars
       ];
     };
@@ -485,7 +484,7 @@
       settings = {
         main = {
           term = "xterm-256color";
-          font = "Fira Code Nerdfont:size=11";
+          font = "Fira Code Nerdfont:size=9";
           dpi-aware = "yes";
         };
         mouse = {
