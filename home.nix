@@ -9,13 +9,29 @@
       (writeShellScriptBin "spaste" ''
         ${curl}/bin/curl -X POST --data-binary @- https://p.seanbehan.ca
       '')
-      weechat
-      ctags
-      ripgrep
-      eza
-      python3
-      pylint
+      (pass.withExtensions (subpkgs: with subpkgs; [
+        pass-audit
+        pass-otp
+        pass-genphrase
+      ]))
+      aerc
       bat
+      ctags
+      eza
+      grim
+      jdt-language-server
+      nodejs
+      nodePackages.bash-language-server
+      nodePackages.svelte-language-server
+      nodePackages.typescript-language-server
+      pylint
+      pyright
+      python3
+      rcm
+      ripgrep
+      slurp
+      vscode-langservers-extracted
+      weechat
     ];
 
     shellAliases = {
@@ -359,30 +375,34 @@
             enable = true
           },
         }
+
+        local on_attach = function(client, bufnr)
+          require("lsp-format").on_attach(client, bufnr)
+        end
+
+        require("lsp-format").setup{}
+        require('lspconfig').tsserver.setup{ on_attach = on_attach }
+        require('lspconfig').eslint.setup{ on_attach = on_attach }
+        require('lspconfig').jdtls.setup{ on_attach = on_attach }
+        require('lspconfig').svelte.setup{ on_attach = on_attach }
+        require('lspconfig').bashls.setup{ on_attach = on_attach }
+        require('lspconfig').pyright.setup{ on_attach = on_attach }
+        require('lspconfig').nixd.setup{ on_attach = on_attach }
       '';
       extraConfig = ''
+        set guicursor=n-v-c-i:block
+        set nowrap
         colorscheme catppuccin_mocha
+        map <leader>ac :lua vim.lsp.buf.code_action()<CR>
+        map <leader><space> :nohl<CR>
         let g:lightline = {
               \ 'colorscheme': 'catppuccin_mocha',
               \ }
-        let g:coc_disable_startup_warning = 1
-        map <leader>ac <Plug>(coc-codeaction-cursor)
-        set nowrap
       '';
       plugins = [
+        pkgs.vimPlugins.nvim-lspconfig
+        pkgs.vimPlugins.lsp-format-nvim
         pkgs.vimPlugins.catppuccin-vim
-        pkgs.vimPlugins.coc-eslint
-        pkgs.vimPlugins.coc-json
-        pkgs.vimPlugins.coc-prettier
-        pkgs.vimPlugins.coc-snippets
-        pkgs.vimPlugins.coc-svelte
-        pkgs.vimPlugins.coc-tsserver
-        pkgs.vimPlugins.coc-tsserver
-        pkgs.vimPlugins.coc-clangd
-        pkgs.vimPlugins.coc-pyright
-        pkgs.vimPlugins.coc-rust-analyzer
-        pkgs.vimPlugins.coc-svelte
-        pkgs.vimPlugins.coc-sh
         pkgs.vimPlugins.commentary
         pkgs.vimPlugins.fugitive
         pkgs.vimPlugins.gitgutter

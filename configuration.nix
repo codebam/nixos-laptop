@@ -24,7 +24,7 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 1w";
+      options = "--delete-older-than 7d";
     };
   };
   networking = {
@@ -126,24 +126,13 @@
   };
 
   environment.systemPackages = with pkgs; [
-    aerc
     blender-hip
     distrobox
     git
-    grim
     libnotify
     nil
     nixd
     nixpkgs-fmt
-    nodejs
-    (pass.withExtensions (subpkgs: with subpkgs; [
-      pass-audit
-      pass-otp
-      pass-genphrase
-    ]))
-    playerctl
-    rcm
-    slurp
     virt-manager
     wl-clipboard
     xdg-utils
