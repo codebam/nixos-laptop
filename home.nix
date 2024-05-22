@@ -397,6 +397,22 @@
         require('lspconfig').nixd.setup{ on_attach = on_attach }
         require('lspconfig').clangd.setup{ on_attach = on_attach }
 
+        local prettier = {
+            formatCommand = [[prettier --stdin-filepath ''${INPUT} ''${--tab-width:tab_width}]],
+            formatStdin = true,
+        }
+        require("lspconfig").efm.setup {
+            on_attach = on_attach,
+            init_options = { documentFormatting = true },
+            settings = {
+                languages = {
+                    typescript = { prettier },
+                    javascript = { prettier },
+                    json = { prettier },
+                },
+            },
+        }
+
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
         local luasnip = require('luasnip')
@@ -471,7 +487,6 @@
         pkgs.vimPlugins.sleuth
         pkgs.vimPlugins.surround
         pkgs.vimPlugins.todo-comments-nvim
-        pkgs.vimPlugins.vim-snippets
         pkgs.vimPlugins.fzf-vim
         pkgs.vimPlugins.nvim-treesitter.withAllGrammars
       ];
