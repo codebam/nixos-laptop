@@ -10,6 +10,7 @@
     # linux-testing-update.url = "github:codebam/nixpkgs/linux_testing";
     # linux-latest-update.url = "github:K900/nixpkgs/kernel-6.9";
     # bcachefs-fix.url = "github:tmuehlbacher/bcachefs-tools/fix-encrypted-unlock";
+    validity.url = "github:codebam/nixpkgs/python3-validity";
   };
 
   outputs = { nixpkgs, home-manager, catppuccin, ... }@inputs: {
