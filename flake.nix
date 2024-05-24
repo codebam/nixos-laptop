@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
+    validity.url = "github:codebam/nixpkgs/python3-validity";
   };
 
   outputs = { nixpkgs, home-manager, catppuccin, lanzaboote, ... }@inputs: {
