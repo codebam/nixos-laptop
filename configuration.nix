@@ -126,7 +126,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    blender-hip
     distrobox
     git
     libnotify
