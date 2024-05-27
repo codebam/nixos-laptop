@@ -25,7 +25,7 @@
       eza
       grim
       jdt-language-server
-      nodejs
+      nodePackages_latest.nodejs
       nodePackages.bash-language-server
       nodePackages.svelte-language-server
       nodePackages.typescript-language-server
@@ -351,24 +351,7 @@
     neovim = {
       enable = true;
       defaultEditor = true;
-      coc = {
-        enable = true;
-        settings = {
-          "coc.preferences.formatOnSave" = true;
-          languageserver = {
-            nix = {
-              command = "nil";
-              filetypes = [ "nix" ];
-              rootPatterns = [ "flake.nix" ];
-              settings = {
-                nil = {
-                  formatting = { command = [ "nixpkgs-fmt" ]; };
-                };
-              };
-            };
-          };
-        };
-      };
+      extraLuaPackages = ps: [ ps.jsregexp ];
       extraLuaConfig = ''
 
         require('nvim-treesitter.configs').setup {
@@ -396,6 +379,7 @@
         require('lspconfig').pyright.setup{ on_attach = on_attach }
         require('lspconfig').nixd.setup{ on_attach = on_attach }
         require('lspconfig').clangd.setup{ on_attach = on_attach }
+        require('lspconfig').html.setup{ on_attach = on_attach }
 
         local prettier = {
             formatCommand = [[prettier --stdin-filepath ''${INPUT} ''${--tab-width:tab_width}]],
@@ -407,6 +391,7 @@
             settings = {
                 languages = {
                     typescript = { prettier },
+                    html = { prettier },
                     javascript = { prettier },
                     json = { prettier },
                 },
@@ -468,6 +453,9 @@
               \ }
         map <leader>ac :lua vim.lsp.buf.code_action()<CR>
         map <leader><space> :nohl<CR>
+        set ts=2
+        set undofile
+        set undodir=$HOME/.vim/undodir
       '';
       plugins = [
         pkgs.vimPlugins.nvim-lspconfig
