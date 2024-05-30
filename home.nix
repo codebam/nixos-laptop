@@ -142,25 +142,6 @@
             adaptive_sync = "on";
             subpixel = "none";
           };
-          "eDP-1" = {
-            scale = "1.5";
-          };
-        };
-        input = {
-          "1739:0:Synaptics_TM3289-021" = {
-            events = "enabled";
-            dwt = "enabled";
-            tap = "enabled";
-            natural_scroll = "enabled";
-            middle_emulation = "enabled";
-            pointer_accel = "0.2";
-            accel_profile = "adaptive";
-          };
-          "2:10:TPPS/2_Elan_TrackPoint" = {
-            events = "enabled";
-            pointer_accel = "0.7";
-            accel_profile = "adaptive";
-          };
         };
         bars = [{
           position = "top";
@@ -236,18 +217,12 @@
           spaste < /tmp/screenshot.png | tr -d '\n' | ${pkgs.wl-clipboard}/bin/wl-copy
           '')}";
           "${modifier}+n" = "exec '${pkgs.sway}/bin/swaymsg \"bar mode toggle\"'";
-          "XF86AudioRaiseVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
-          "XF86AudioLowerVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";
-          "XF86AudioMute" = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          "XF86AudioMicMute" = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
         };
       };
       extraConfig = let inherit modifier; in ''
         bindsym --whole-window {
-          ${modifier}+Shift+button4 exec "${pkgs.brightnessctl}/bin/brightnessctl set +1%"
-          ${modifier}+Shift+button5 exec "${pkgs.brightnessctl}/bin/brightnessctl set 1%-"
-          ${modifier}+button4 exec "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 1%+"
-          ${modifier}+button5 exec "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 1%-"
+          ${modifier}+button4 exec "wpctl set-volume @DEFAULT_SINK@ 1%+"
+          ${modifier}+button5 exec "wpctl set-volume @DEFAULT_SINK@ 1%-"
         }
       '';
     };
@@ -282,6 +257,7 @@
             }
             {
               block = "sound";
+              format = "$volume";
             }
             {
               alert = 10.0;
@@ -299,17 +275,24 @@
               block = "cpu";
             }
             {
+              block = "amd_gpu";
+              format = " $icon $utilization $vram_used_percents";
+            }
+            {
               block = "load";
             }
             {
               block = "net";
             }
             {
-              block = "time";
-              interval = 60;
+              block = "external_ip";
             }
             {
-              block = "battery";
+              block = "temperature";
+            }
+            {
+              block = "time";
+              interval = 60;
             }
           ];
         };
@@ -323,29 +306,42 @@
       interactiveShellInit = ''
         set fish_greeting
         function fish_command_not_found
-          ${pkgs.nodejs}/bin/node ~/git/cloudflare-ai-cli/src/client.mjs "$argv"
+          node ~/git/cloudflare-ai-cli/src/client.mjs "$argv"
         end
       '';
-      plugins = [{
-        name = "fisher";
-        src = pkgs.fetchFromGitHub {
-          owner = "jorgebucaran";
-          repo = "fisher";
-          rev = "2efd33ccd0777ece3f58895a093f32932bd377b6";
-          sha256 = "sha256-e8gIaVbuUzTwKtuMPNXBT5STeddYqQegduWBtURLT3M=";
-        };
-      }];
+      plugins = [
+        {
+          name = "autopair.fish";
+          src = pkgs.fetchFromGitHub {
+            owner = "jorgebucaran";
+            repo = "autopair.fish";
+            rev = "4d1752ff5b39819ab58d7337c69220342e9de0e2";
+            sha256 = "sha256-qt3t1iKRRNuiLWiVoiAYOu+9E7jsyECyIqZJ/oRIT1A=";
+          };
+        }
+        {
+          name = "puffer-fish";
+          src = pkgs.fetchFromGitHub {
+            owner = "nickeb96";
+            repo = "puffer-fish";
+            rev = "12d062eae0ad24f4ec20593be845ac30cd4b5923";
+            sha256 = "sha256-2niYj0NLfmVIQguuGTA7RrPIcorJEPkxhH6Dhcy+6Bk=";
+          };
+        }
+      ];
     };
     bash = {
       enable = true;
       initExtra = ''
         command_not_found_handle() {
-            ${pkgs.nodejs}/bin/node ~/git/cloudflare-ai-cli/src/client.mjs "$@"
+          node ~/git/cloudflare-ai-cli/src/client.mjs "$@"
         }
       '';
       profileExtra = ''
         PATH="$HOME/.local/bin:$PATH"
         export PATH
+        WLR_RENDERER=vulkan
+        export WLR_RENDERER
       '';
     };
     neovim = {
@@ -353,6 +349,14 @@
       defaultEditor = true;
       extraLuaPackages = ps: [ ps.jsregexp ];
       extraLuaConfig = ''
+
+        require('gen').setup({
+          model = "phi3:latest",
+          display_mode = "split",
+          show_prompt = true,
+          show_model = true,
+          no_auto_close = true,
+        })
 
         require('nvim-treesitter.configs').setup {
           auto_install = false,
@@ -524,7 +528,7 @@
       userEmail = "codebam@riseup.net";
       userName = "Sean Behan";
       signing = {
-        key = "097B3E3F284C7B4C";
+        key = "0F6D5021A87F92BA";
         signByDefault = true;
       };
       extraConfig = {
