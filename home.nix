@@ -558,99 +558,124 @@
       '';
     };
 
-    foot = {
+    kitty = {
       enable = true;
+      font = {
+        name = "Fira Code Nerdfont";
+        size = 12.0;
+      };
+      shellIntegration.mode = "no-cursor";
       settings = {
-        main = {
-          term = "xterm-256color";
-          font = "Fira Code Nerdfont:size=9";
-          dpi-aware = "yes";
-        };
-        mouse = {
-          hide-when-typing = "yes";
-        };
-        bell = {
-          urgent = "yes";
-          command = "${pkgs.pipewire}/bin/pw-play /run/current-system/sw/share/sounds/freedesktop/stereo/bell.oga";
-          command-focused = "yes";
-        };
-        colors = {
-          alpha = 1.0;
-        };
-      };
-    };
-    wofi = {
-      enable = true;
-      settings = {
-        show = "drun";
-        dmenu = true;
-        insensitive = true;
-        prompt = "";
-        width = "25%";
-        lines = 5;
-        location = "center";
-        hide_scroll = true;
-        allow_images = true;
-      };
-    };
-    direnv = {
-      enable = true;
-      enableBashIntegration = true;
-      nix-direnv.enable = true;
-    };
-    fzf = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      defaultOptions = [ "--no-height" "--no-reverse" ];
-      tmux = {
-        enableShellIntegration = true;
+        cursor_shape = "block";
+        cursor_blink_interval = 0;
       };
     };
 
-    starship = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-    };
-
-    tiny = {
-      enable = true;
-    };
-
-    senpai = {
-      enable = true;
-      config = {
-        address = "chat.sr.ht:6697";
-        nickname = "codebam";
-        password-cmd = [ "pass" "show" "chat.sr.ht" ];
+    foot =
+      {
+        enable = true;
+        settings = {
+          main = {
+            term = "xterm-256color";
+            font = "Fira Code Nerdfont:size=11";
+            dpi-aware = "yes";
+          };
+          mouse = {
+            hide-when-typing = "yes";
+          };
+          bell = {
+            urgent = "yes";
+            command = "${pkgs.pipewire}/bin/pw-play /run/current-system/sw/share/sounds/freedesktop/stereo/bell.oga";
+            command-focused = "yes";
+          };
+          colors = {
+            alpha = 1.0;
+          };
+        };
       };
-    };
+    wofi =
+      {
+        enable = true;
+        settings = {
+          show = "drun";
+          dmenu = true;
+          insensitive = true;
+          prompt = "";
+          width = "25%";
+          lines = 5;
+          location = "center";
+          hide_scroll = true;
+          allow_images = true;
+        };
+      };
+    direnv =
+      {
+        enable = true;
+        enableBashIntegration = true;
+        nix-direnv.enable = true;
+      };
+    fzf =
+      {
+        enable = true;
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        defaultOptions = [ "--no-height" "--no-reverse" ];
+        tmux = {
+          enableShellIntegration = true;
+        };
+      };
 
-    ncmpcpp = {
-      enable = true;
-    };
+    starship =
+      {
+        enable = true;
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+      };
+
+    tiny =
+      {
+        enable = true;
+      };
+
+    senpai =
+      {
+        enable = true;
+        config = {
+          address = "chat.sr.ht:6697";
+          nickname = "codebam";
+          password-cmd = [ "pass" "show" "chat.sr.ht" ];
+        };
+      };
+
+    ncmpcpp =
+      {
+        enable = true;
+      };
     home-manager.enable = true;
   };
 
-  services.mako = {
-    enable = true;
-    layer = "overlay";
-    font = "Noto Sans";
-    defaultTimeout = 5000;
-  };
+  services.mako =
+    {
+      enable = true;
+      layer = "overlay";
+      font = "Noto Sans";
+      defaultTimeout = 5000;
+    };
 
-  gtk = {
-    enable = true;
-  };
+  gtk =
+    {
+      enable = true;
+    };
 
-  xdg = {
-    enable = true;
-  };
+  xdg =
+    {
+      enable = true;
+    };
 
-  catppuccin = {
-    enable = true;
-    flavor = "mocha";
-    accent = "blue";
-  };
+  catppuccin =
+    {
+      enable = true;
+      flavor = "mocha";
+      accent = "blue";
+    };
 }
