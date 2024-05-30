@@ -257,7 +257,6 @@
             }
             {
               block = "sound";
-              format = "$volume";
             }
             {
               alert = 10.0;
@@ -275,20 +274,7 @@
               block = "cpu";
             }
             {
-              block = "amd_gpu";
-              format = " $icon $utilization $vram_used_percents";
-            }
-            {
               block = "load";
-            }
-            {
-              block = "net";
-            }
-            {
-              block = "external_ip";
-            }
-            {
-              block = "temperature";
             }
             {
               block = "time";
