@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ pkgs, lib, inputs, ... }:
 
 {
   home = {
@@ -377,7 +377,7 @@
         require('lspconfig').svelte.setup{ on_attach = on_attach }
         require('lspconfig').bashls.setup{ on_attach = on_attach }
         require('lspconfig').pyright.setup{ on_attach = on_attach }
-        require('lspconfig').nixd.setup{ on_attach = on_attach }
+        require('lspconfig').nil_ls.setup{ on_attach = on_attach }
         require('lspconfig').clangd.setup{ on_attach = on_attach }
         require('lspconfig').html.setup{ on_attach = on_attach }
 
@@ -453,29 +453,36 @@
               \ }
         map <leader>ac :lua vim.lsp.buf.code_action()<CR>
         map <leader><space> :nohl<CR>
+        nnoremap <leader>ff <cmd>Telescope find_files<cr>
+        nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+        nnoremap <leader>fb <cmd>Telescope buffers<cr>
+        nnoremap <leader>fh <cmd>Telescope help_tags<cr>
         set ts=2
         set undofile
         set undodir=$HOME/.vim/undodir
       '';
       plugins = [
-        pkgs.vimPlugins.nvim-lspconfig
-        pkgs.vimPlugins.lsp-format-nvim
-        pkgs.vimPlugins.nvim-cmp
-        pkgs.vimPlugins.luasnip
+        pkgs.vimPlugins.catppuccin-vim
         pkgs.vimPlugins.cmp_luasnip
         pkgs.vimPlugins.cmp-nvim-lsp
-        pkgs.vimPlugins.friendly-snippets
-        pkgs.vimPlugins.catppuccin-vim
         pkgs.vimPlugins.commentary
+        pkgs.vimPlugins.friendly-snippets
         pkgs.vimPlugins.fugitive
         pkgs.vimPlugins.gitgutter
+        pkgs.vimPlugins.telescope-nvim
         pkgs.vimPlugins.lightline-vim
+        pkgs.vimPlugins.lsp-format-nvim
+        pkgs.vimPlugins.luasnip
+        pkgs.vimPlugins.nvim-cmp
+        pkgs.vimPlugins.nvim-lspconfig
+        pkgs.vimPlugins.nvim-web-devicons
         pkgs.vimPlugins.plenary-nvim
         pkgs.vimPlugins.sensible
         pkgs.vimPlugins.sleuth
         pkgs.vimPlugins.surround
         pkgs.vimPlugins.todo-comments-nvim
-        pkgs.vimPlugins.fzf-vim
+        pkgs.vimPlugins.trouble-nvim
+        inputs.gen-nvim-latest-pin.legacyPackages.${pkgs.system}.vimPlugins.gen-nvim
         pkgs.vimPlugins.nvim-treesitter.withAllGrammars
       ];
     };
@@ -558,99 +565,124 @@
       '';
     };
 
-    foot = {
+    kitty = {
       enable = true;
+      font = {
+        name = "Fira Code Nerdfont";
+        size = 12.0;
+      };
+      shellIntegration.mode = "no-cursor";
       settings = {
-        main = {
-          term = "xterm-256color";
-          font = "Fira Code Nerdfont:size=9";
-          dpi-aware = "yes";
-        };
-        mouse = {
-          hide-when-typing = "yes";
-        };
-        bell = {
-          urgent = "yes";
-          command = "${pkgs.pipewire}/bin/pw-play /run/current-system/sw/share/sounds/freedesktop/stereo/bell.oga";
-          command-focused = "yes";
-        };
-        colors = {
-          alpha = 1.0;
-        };
-      };
-    };
-    wofi = {
-      enable = true;
-      settings = {
-        show = "drun";
-        dmenu = true;
-        insensitive = true;
-        prompt = "";
-        width = "25%";
-        lines = 5;
-        location = "center";
-        hide_scroll = true;
-        allow_images = true;
-      };
-    };
-    direnv = {
-      enable = true;
-      enableBashIntegration = true;
-      nix-direnv.enable = true;
-    };
-    fzf = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      defaultOptions = [ "--no-height" "--no-reverse" ];
-      tmux = {
-        enableShellIntegration = true;
+        cursor_shape = "block";
+        cursor_blink_interval = 0;
       };
     };
 
-    starship = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-    };
-
-    tiny = {
-      enable = true;
-    };
-
-    senpai = {
-      enable = true;
-      config = {
-        address = "chat.sr.ht:6697";
-        nickname = "codebam";
-        password-cmd = [ "pass" "show" "chat.sr.ht" ];
+    foot =
+      {
+        enable = true;
+        settings = {
+          main = {
+            term = "xterm-256color";
+            font = "Fira Code Nerdfont:size=11";
+            dpi-aware = "yes";
+          };
+          mouse = {
+            hide-when-typing = "yes";
+          };
+          bell = {
+            urgent = "yes";
+            command = "${pkgs.pipewire}/bin/pw-play /run/current-system/sw/share/sounds/freedesktop/stereo/bell.oga";
+            command-focused = "yes";
+          };
+          colors = {
+            alpha = 1.0;
+          };
+        };
       };
-    };
+    wofi =
+      {
+        enable = true;
+        settings = {
+          show = "drun";
+          dmenu = true;
+          insensitive = true;
+          prompt = "";
+          width = "25%";
+          lines = 5;
+          location = "center";
+          hide_scroll = true;
+          allow_images = true;
+        };
+      };
+    direnv =
+      {
+        enable = true;
+        enableBashIntegration = true;
+        nix-direnv.enable = true;
+      };
+    fzf =
+      {
+        enable = true;
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        defaultOptions = [ "--no-height" "--no-reverse" ];
+        tmux = {
+          enableShellIntegration = true;
+        };
+      };
 
-    ncmpcpp = {
-      enable = true;
-    };
+    starship =
+      {
+        enable = true;
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+      };
+
+    tiny =
+      {
+        enable = true;
+      };
+
+    senpai =
+      {
+        enable = true;
+        config = {
+          address = "chat.sr.ht:6697";
+          nickname = "codebam";
+          password-cmd = [ "pass" "show" "chat.sr.ht" ];
+        };
+      };
+
+    ncmpcpp =
+      {
+        enable = true;
+      };
     home-manager.enable = true;
   };
 
-  services.mako = {
-    enable = true;
-    layer = "overlay";
-    font = "Noto Sans";
-    defaultTimeout = 5000;
-  };
+  services.mako =
+    {
+      enable = true;
+      layer = "overlay";
+      font = "Noto Sans";
+      defaultTimeout = 5000;
+    };
 
-  gtk = {
-    enable = true;
-  };
+  gtk =
+    {
+      enable = true;
+    };
 
-  xdg = {
-    enable = true;
-  };
+  xdg =
+    {
+      enable = true;
+    };
 
-  catppuccin = {
-    enable = true;
-    flavor = "mocha";
-    accent = "blue";
-  };
+  catppuccin =
+    {
+      enable = true;
+      flavor = "mocha";
+      accent = "blue";
+    };
 }
