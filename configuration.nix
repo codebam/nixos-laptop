@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   imports =
@@ -134,10 +134,10 @@
 
   environment.systemPackages = with pkgs; [
     distrobox
+    efm-langserver
     git
     libnotify
     nil
-    nixd
     nixpkgs-fmt
     nodePackages_latest.nodejs
     virt-manager
