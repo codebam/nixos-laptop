@@ -302,9 +302,6 @@
               block = "load";
             }
             {
-              block = "net";
-            }
-            {
               block = "time";
               interval = 60;
             }
