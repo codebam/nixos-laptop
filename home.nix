@@ -479,7 +479,6 @@
         pkgs.vimPlugins.surround
         pkgs.vimPlugins.todo-comments-nvim
         pkgs.vimPlugins.trouble-nvim
-        inputs.gen-nvim-latest-pin.legacyPackages.${pkgs.system}.vimPlugins.gen-nvim
         pkgs.vimPlugins.nvim-treesitter.withAllGrammars
       ];
     };
