@@ -21,22 +21,11 @@
       bat
       clang-tools
       ctags
-      efm-langserver
       eza
       grim
-      jdt-language-server
-      nodePackages_latest.nodejs
-      nodePackages.bash-language-server
-      nodePackages.svelte-language-server
-      nodePackages.typescript-language-server
-      nodePackages.prettier
-      pylint
-      pyright
-      python3
       rcm
       ripgrep
       slurp
-      vscode-langservers-extracted
       weechat
     ];
 
