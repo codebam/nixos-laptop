@@ -2,11 +2,11 @@
   "nodes": {
     "catppuccin": {
       "locked": {
-        "lastModified": 1716337435,
-        "narHash": "sha256-eZqH1vLI9eKL/N5toXxOrQO80G0y4pWZrYCp472YBVQ=",
+        "lastModified": 1717070887,
+        "narHash": "sha256-ZTEMINFqQL+m55kmoDYIKf3i2NGitSkjBnnLu99ezh0=",
         "owner": "catppuccin",
         "repo": "nix",
-        "rev": "fea5242c0eacc5efa81be0e36206a62e889dbd82",
+        "rev": "2c7661c9fa26a920b8088300ef87d14179c71a27",
         "type": "github"
       },
       "original": {
@@ -103,22 +103,6 @@
         "type": "github"
       }
     },
-    "gen-nvim-latest-pin": {
-      "locked": {
-        "lastModified": 1715138213,
-        "narHash": "sha256-Qw22wnLFatbt5L/NFaDlfYQ9FMCTRzAoMFSM8U/ri3I=",
-        "owner": "codebam",
-        "repo": "nixpkgs",
-        "rev": "603d79e37836c0c69e8274317189b43cd2ebb568",
-        "type": "github"
-      },
-      "original": {
-        "owner": "codebam",
-        "ref": "gen-nvim",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -148,11 +132,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1716736760,
-        "narHash": "sha256-h3RmnNknKYtVA+EvUSra6QAwfZjC2q1G8YA7W0gat8Y=",
+        "lastModified": 1717097707,
+        "narHash": "sha256-HC5vJ3oYsjwsCaSbkIPv80e4ebJpNvFKQTBOGlHvjLs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5d151429e1e79107acf6d06dcc5ace4e642ec239",
+        "rev": "0eb314b4f0ba337e88123e0b1e57ef58346aafd9",
         "type": "github"
       },
       "original": {
@@ -190,11 +174,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1716792620,
-        "narHash": "sha256-wQmXzee/veETYJv93TkRYsAQkEdt2QYCJeJil5SrJfg=",
+        "lastModified": 1717172628,
+        "narHash": "sha256-4hOdCCCaD0AYx/DZS68zjW32Fu1jeGxGrR4ZuwTnWFU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "7d7cf1590c05d799745bf456f2b95b798f48d3bb",
+        "rev": "7c97b28c7d95689e2da774cd75eac60f7d790d23",
         "type": "github"
       },
       "original": {
@@ -254,10 +238,10 @@
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
-        "gen-nvim-latest-pin": "gen-nvim-latest-pin",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "validity": "validity"
       }
     },
     "rust-overlay": {
@@ -297,6 +281,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "validity": {
+      "locked": {
+        "lastModified": 1716222270,
+        "narHash": "sha256-PgctTd8/cqON1VDi88petvGaszQoWJGhf2LXyZEd220=",
+        "owner": "codebam",
+        "repo": "nixpkgs",
+        "rev": "a9c6bfa5e4f0e01551fec1e37f111733a2628e55",
+        "type": "github"
+      },
+      "original": {
+        "owner": "codebam",
+        "ref": "python3-validity",
+        "repo": "nixpkgs",
         "type": "github"
       }
     }
