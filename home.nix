@@ -285,6 +285,9 @@
               format = " $icon $mem_used_percents ";
             }
             {
+              block = "net";
+            }
+            {
               block = "cpu";
             }
             {
