@@ -19,8 +19,6 @@
       ]))
       aerc
       bat
-      clang-tools
-      ctags
       eza
       grim
       rcm
@@ -314,7 +312,7 @@
       interactiveShellInit = ''
         set fish_greeting
         function fish_command_not_found
-          node ~/git/cloudflare-ai-cli/src/client.mjs "$argv"
+          ${pkgs.nodejs}/bin/node ~/git/cloudflare-ai-cli/src/client.mjs "$argv"
         end
       '';
       plugins = [
@@ -342,7 +340,7 @@
       enable = true;
       initExtra = ''
         command_not_found_handle() {
-          node ~/git/cloudflare-ai-cli/src/client.mjs "$@"
+          ${pkgs.nodejs}/bin/node ~/git/cloudflare-ai-cli/src/client.mjs "$@"
         }
       '';
       profileExtra = ''
