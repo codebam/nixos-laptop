@@ -281,11 +281,11 @@
               warning = 20.0;
             }
             {
-              block = "memory";
-              format = " $icon $mem_used_percents ";
+              block = "net";
             }
             {
-              block = "net";
+              block = "memory";
+              format = " $icon $mem_used_percents ";
             }
             {
               block = "cpu";
