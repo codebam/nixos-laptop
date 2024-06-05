@@ -18,7 +18,7 @@
     {
       device = "UUID=3541a298-17c9-48dd-8202-c9e0b263d2d4";
       fsType = "bcachefs";
-      options = [ "compression=lz4" "background_compression=zstd" ];
+      options = [ "compression=lz4" "background_compression=zstd" "discard" ];
     };
 
   fileSystems."/boot" =
