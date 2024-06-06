@@ -244,6 +244,7 @@
       # bcachefs-tools = inputs.bcachefs-fix.packages.x86_64-linux.bcachefs;
     })
   ];
+  services.thermald.enable = true;
   services.tlp = {
     enable = true;
     settings = {
