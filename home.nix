@@ -294,6 +294,9 @@
               block = "load";
             }
             {
+              block = "temperature";
+            }
+            {
               block = "time";
               interval = 60;
             }
