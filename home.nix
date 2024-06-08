@@ -75,7 +75,7 @@
       systemd.enable = true;
       config = rec {
         inherit modifier;
-        terminal = "kitty";
+        terminal = "foot";
         menu = "${pkgs.wmenu}/bin/wmenu-run -i -N 1e1e2e -n 89b4fa -M 1e1e2e -m 89b4fa -S 89b4fa -s cdd6f4";
         fonts = {
           names = [ "Noto Sans" "FontAwesome" ];
@@ -587,7 +587,7 @@
         settings = {
           main = {
             term = "xterm-256color";
-            font = "Fira Code Nerdfont:size=11";
+            font = "Fira Code Nerdfont:size=9";
             dpi-aware = "yes";
           };
           mouse = {
